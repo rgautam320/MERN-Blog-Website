@@ -10,6 +10,7 @@ import {
     createIcon,
     Link,
 } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
 export default function CallToActionWithAnnotation() {
     return (
@@ -23,8 +24,9 @@ export default function CallToActionWithAnnotation() {
                             color={'green.400'}
                             bgGradient="linear(to-r, #30CFD0 0%, #ce47e7 100%)"
                             bgClip="text"
+                            fontSize="4xl"
                         >
-                            Rajan Gautam
+                            Rajan Gautam and Prakhar Jajoo
                         </Text>
                     </Heading>
                     <Text color={'gray.500'}>
@@ -34,7 +36,6 @@ export default function CallToActionWithAnnotation() {
                     <Stack direction={'column'} spacing={3} align={'center'} alignSelf={'center'} position={'relative'}>
                         <Button
                             as={Link}
-                            href={'/posts'}
                             colorScheme={'green'}
                             bg={'green.500'}
                             rounded={'full'}
@@ -44,7 +45,7 @@ export default function CallToActionWithAnnotation() {
                             }}
                             color={'gray.100'}
                         >
-                            Get Started
+                            <NavLink to="/posts">Get Started</NavLink>
                         </Button>
 
                         <Box>

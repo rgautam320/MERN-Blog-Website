@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/en-gb';
 import { Image, chakra, useColorModeValue, Link, Box, Flex, Spacer } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
 const Post = ({ post }) => {
     const convertRelativeTime = date => {
@@ -30,16 +31,10 @@ const Post = ({ post }) => {
                         {post.tag}
                     </chakra.span>
 
-                    <Link
-                        display="block"
-                        color={useColorModeValue('gray.800', 'white')}
-                        fontWeight="bold"
-                        fontSize="2xl"
-                        _hover={{ color: 'gray.500', textDecor: 'underline' }}
-                        href={`posts/${post._id}`}
-                    >
-                        {post.title}
-                    </Link>
+                    <Box fontSize="2xl" cursor="pointer">
+                        <NavLink to={`posts/${post._id}`}>{post.title}</NavLink>
+                    </Box>
+
                     <chakra.span
                         mt={2}
                         fontSize="sm"

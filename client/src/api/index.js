@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:8080/posts';
+const API_ENDPOINT = 'https://awt-lab-blog-website-api.herokuapp.com/posts';
 
 export const fetchPosts = async () => {
     return await axios.get(API_ENDPOINT);
@@ -15,7 +15,7 @@ export const createPost = async post => {
 };
 
 export const updatePost = async (id, updatedPost) => {
-    return await axios.patch(`${API_ENDPOINT}/${id}`, updatedPost);
+    return await axios.put(`${API_ENDPOINT}/${id}`, updatedPost);
 };
 
 export const deletePost = async id => {

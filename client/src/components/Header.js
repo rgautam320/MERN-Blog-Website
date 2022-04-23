@@ -1,8 +1,10 @@
 import React from 'react';
-import { chakra, useColorModeValue, Flex, Button, Link } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
+import { chakra, useColorModeValue, Flex, Button, Link, Box } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/hooks';
+
 import Logo from '../images/Logo.png';
 import AddPostForm from './AddPostForm';
-import { useDisclosure } from '@chakra-ui/hooks';
 
 const Header = () => {
     const bg = useColorModeValue('white', 'gray.800');
@@ -13,9 +15,11 @@ const Header = () => {
             <chakra.header bg={bg} w="full" px={5} py={1} shadow="md" mx="auto">
                 <Flex align="center" justify="space-between" mx="auto" maxW="1420px">
                     <Flex>
-                        <chakra.a href={'/'} title="Choc Home Page" display="flex" alignItems="center" py={3}>
-                            <img src={Logo} alt="Logo" className="logo" />
-                        </chakra.a>
+                        <Box py={3}>
+                            <NavLink to="/">
+                                <img src={Logo} alt="Logo" className="logo" />
+                            </NavLink>
+                        </Box>
                     </Flex>
                     <Flex align="center">
                         <Link
