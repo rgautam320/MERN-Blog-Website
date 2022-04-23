@@ -9,13 +9,17 @@
 
 ### In the frontend, we have used Chakra UI.
 
-### We've deployed the backend on Heroku.
+### We've deployed the backend on Azure Web App and Heroku.
 
-#### [API Endpoint](https://awt-lab-blog-website-api.herokuapp.com)
+#### Azure Web App: [API Endpoint](https://awt-lab-blog-website-api.azurewebsites.net)
 
-### We've deployed our app on Netlify.
+#### Heroku: [API Endpoint](https://awt-lab-blog-website-api.herokuapp.com)
 
-#### [Website URL](https://awt-lab-blog-website.netlify.app)
+### We've deployed our app on Azure Web App and Netlify.
+
+#### Azure Web App: [Website URL](https://awt-lab-blog-website.azurewebsites.net)
+
+#### Netlify: [Website URL](https://awt-lab-blog-website.netlify.app)
 
 ## Sample Screenshots
 
