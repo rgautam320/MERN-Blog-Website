@@ -9,6 +9,14 @@
 
 ### In the frontend, we have used Chakra UI.
 
+### We've deployed the backend on Heroku.
+
+#### [API Endpoint](https://awt-lab-blog-website-api.herokuapp.com)
+
+### We've deployed our app on Netlify.
+
+#### [Website URL](https://awt-lab-blog-website.netlify.app)
+
 ## Sample Screenshots
 
 ### 1. Home Page
