@@ -19,6 +19,8 @@ const PostDetails = () => {
     const { currentPost, loading, error } = currentPosts;
     const [editMode, setEditMode] = useState(false);
 
+    const user = JSON.parse(localStorage.getItem('USER'));
+
     const openEditMode = () => {
         setEditMode(true);
     };
@@ -91,7 +93,10 @@ const PostDetails = () => {
                                                     h={10}
                                                     fit="cover"
                                                     rounded="full"
-                                                    src="https://source.unsplash.com/random/48x48"
+                                                    src={
+                                                        currentPost?.authorProfile ||
+                                                        'https://source.unsplash.com/random/48x48'
+                                                    }
                                                     alt="Avatar"
                                                 />
                                                 <Flex align="flex-start" direction="column">
@@ -109,13 +114,16 @@ const PostDetails = () => {
                                             </Flex>
 
                                             <Spacer />
-
-                                            <Button colorScheme="blue" mr={3} onClick={openEditMode}>
-                                                <EditIcon />
-                                            </Button>
-                                            <Button onClick={removePost} colorScheme="red">
-                                                <DeleteIcon />
-                                            </Button>
+                                            {user?.email === currentPost?.authorEmail && (
+                                                <>
+                                                    <Button colorScheme="blue" mr={3} onClick={openEditMode}>
+                                                        <EditIcon />
+                                                    </Button>
+                                                    <Button onClick={removePost} colorScheme="red">
+                                                        <DeleteIcon />
+                                                    </Button>
+                                                </>
+                                            )}
                                         </Flex>
                                     </Box>
 

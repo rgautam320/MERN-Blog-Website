@@ -11,8 +11,34 @@ import {
     Link,
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import jwtDecode from 'jwt-decode';
+import GoogleLogin from 'react-google-login';
+import { GOOGLE_CLIENT_ID } from '../constants';
 
 export default function CallToActionWithAnnotation() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const IdToken = localStorage.getItem('ID_TOKEN');
+
+    const responseGoogle = response => {
+        localStorage.setItem("ID_TOKEN", response?.tokenObj?.id_token);
+        if (response?.tokenObj?.id_token)
+        {
+            setIsAuthenticated(true);
+            window.location.reload();
+            localStorage.setItem('USER', JSON.stringify(response?.profileObj));
+        } 
+    };
+
+    useEffect(() => {
+        if(IdToken){
+            const decodedData = jwtDecode(IdToken);
+            if(decodedData?.email) {
+                setIsAuthenticated(true);
+                localStorage.setItem('USER', JSON.stringify(decodedData));
+            }
+        }
+    }, [IdToken])
     return (
         <>
             <Container maxW={'3xl'} minH="88vh" display="flex" alignItems="center" justifyContent="center">
@@ -34,19 +60,29 @@ export default function CallToActionWithAnnotation() {
                         your field.
                     </Text>
                     <Stack direction={'column'} spacing={3} align={'center'} alignSelf={'center'} position={'relative'}>
-                        <Button
-                            as={Link}
-                            colorScheme={'green'}
-                            bg={'green.500'}
-                            rounded={'full'}
-                            px={6}
-                            _hover={{
-                                bg: 'green.600',
-                            }}
-                            color={'gray.100'}
-                        >
-                            <NavLink to="/posts">Get Started</NavLink>
-                        </Button>
+                        {isAuthenticated ? (
+                            <Button
+                                as={Link}
+                                colorScheme={'green'}
+                                bg={'green.500'}
+                                rounded={'full'}
+                                px={6}
+                                _hover={{
+                                    bg: 'green.600',
+                                }}
+                                color={'gray.100'}
+                            >
+                                <NavLink to="/posts">Get Started</NavLink>
+                            </Button>
+                        ) : (
+                            <GoogleLogin
+                                clientId={GOOGLE_CLIENT_ID}
+                                buttonText="Let's Get Started"
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                                cookiePolicy={'single_host_origin'}
+                            />
+                        )}
 
                         <Box>
                             <Icon

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { chakra, useColorModeValue, Flex, Button, Link, Box } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/hooks';
 
@@ -9,6 +9,16 @@ import AddPostForm from './AddPostForm';
 const Header = () => {
     const bg = useColorModeValue('white', 'gray.800');
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const user = JSON.parse(localStorage.getItem('USER'));
+
+    const history = useHistory();
+
+    const onLogout = () => {
+        localStorage.clear();
+        history.push("/")
+        window.location.reload();
+    }
 
     return (
         <>
@@ -38,9 +48,17 @@ const Header = () => {
                         >
                             Posts
                         </Link>
-                        <Button ml="10" colorScheme="teal" size="sm" onClick={onOpen}>
-                            New Post
-                        </Button>
+
+                        {user && (
+                            <>
+                                <Button ml="10" colorScheme="teal" size="sm" onClick={onOpen}>
+                                    New Post
+                                </Button>
+                                <Button ml="10" colorScheme="red" size="sm" onClick={onLogout}>
+                                    Logout
+                                </Button>
+                            </>
+                        )}
                     </Flex>
                 </Flex>
             </chakra.header>

@@ -55,7 +55,7 @@ const Post = ({ post }) => {
                                 h={10}
                                 fit="cover"
                                 rounded="full"
-                                src="https://source.unsplash.com/random/48x48"
+                                src={post?.authorProfile || 'https://source.unsplash.com/random/48x48'}
                                 alt="Avatar"
                             />
                             <Link mx={2} fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>

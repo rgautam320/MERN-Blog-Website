@@ -24,14 +24,15 @@ const categories = ['Frontend', 'Backend', 'Mobile', 'React', 'Vue', 'JavaScript
 
 const AddPostForm = ({ isOpen, onClose }) => {
     const [file, setFile] = useState(null);
+    const user = JSON.parse(localStorage.getItem('USER'));
 
     const { register, errors, control, handleSubmit } = useForm();
 
     const dispatch = useDispatch();
 
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         try {
-            dispatch(createPost({ ...data, image: file }));
+            await dispatch(createPost({ ...data, image: file, author: user?.name, authorEmail: user?.email, authorProfile: user?.picture }));
             toast.success('Blog successfully added!');
             clearForm();
         } catch (error) {
@@ -90,6 +91,8 @@ const AddPostForm = ({ isOpen, onClose }) => {
                                 id="author"
                                 label="Author"
                                 name="author"
+                                disabled={true}
+                                value={user?.name}
                                 ref={register({
                                     required: {
                                         value: true,

@@ -16,14 +16,18 @@ const EditPostForm = ({ post, closeEditMode }) => {
     const { register, errors, control, handleSubmit } = useForm();
     const dispatch = useDispatch();
 
-    const onSubmit = data => {
+    const user = JSON.parse(localStorage.getItem("USER"));
+
+    const onSubmit = async (data) => {
         try {
             const updatedPost = {
                 _id: post._id,
                 ...data,
                 image: file,
+                authorEmail: user?.email,
+                authorProfile: user?.picture,
             };
-            dispatch(updatePost(post._id, updatedPost));
+            await dispatch(updatePost(post._id, updatedPost));
             toast.success('Blog successfully updated!');
             setFile(null);
             closeEditMode();
@@ -80,6 +84,8 @@ const EditPostForm = ({ post, closeEditMode }) => {
                                 id="author"
                                 label="Author"
                                 name="author"
+                                disabled={true}
+                                value={user?.name}
                                 ref={register({
                                     required: {
                                         value: true,
