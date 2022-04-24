@@ -25,26 +25,32 @@
 
 ### 1. Home Page
 
-![image](https://user-images.githubusercontent.com/71542496/164944213-01844593-46bc-4ab8-9fa3-f25508306a86.png)
+#### Without Authentication
+
+![image](https://user-images.githubusercontent.com/71542496/164979374-cc32e186-6408-4584-b895-22534e7e13a9.png)
+
+#### After Authentication
+
+![image](https://user-images.githubusercontent.com/71542496/164979422-821b30c4-87a8-402a-aca5-8639c4049bab.png)
 
 ### 2. Blogs Page
 
-![image](https://user-images.githubusercontent.com/71542496/164944233-ef64143c-ecca-4534-8ec4-9b4bd8ddc353.png)
+![image](https://user-images.githubusercontent.com/71542496/164979457-35a8dd5a-faa8-4236-9015-63865a6d50d8.png)
 
 ### 3. Blog Detail Page
 
-![image](https://user-images.githubusercontent.com/71542496/164944259-07b28439-fc17-4f6c-b5ab-7f549aa2ac66.png)
+![image](https://user-images.githubusercontent.com/71542496/164979482-08d4b1f1-ac31-4d97-aec7-cbd55a1ee881.png)
 
 ### 4. Add Blog Modal
 
-![image](https://user-images.githubusercontent.com/71542496/164944277-cd484110-238f-43e5-ad9d-1f13827deede.png)
+![image](https://user-images.githubusercontent.com/71542496/164979505-de16c908-7660-4cd4-8ecd-9a516bb1f882.png)
 
 ### 5. Edit Blog Modal
 
-![image](https://user-images.githubusercontent.com/71542496/164944296-c78e207f-a897-444b-a8a1-8553a76a670b.png)
+![image](https://user-images.githubusercontent.com/71542496/164979516-c105fa48-104d-4aea-a811-bd605cacfb9c.png)
 
 ### 6. Delete Blog Warning
 
-![image](https://user-images.githubusercontent.com/71542496/164944317-02217070-3d2b-49d5-81b2-011e8806d144.png)
+![image](https://user-images.githubusercontent.com/71542496/164979533-96264d0e-2d6f-46ca-8afd-4f6c78c71308.png)
 
 ### By Rajan Gautam and Prakhar Jajoo
