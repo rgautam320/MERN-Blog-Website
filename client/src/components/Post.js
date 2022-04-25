@@ -9,6 +9,12 @@ const Post = ({ post }) => {
         return moment(date).fromNow();
     };
 
+    const createHTML = () => {
+        return {
+            __html: post?.content.substring(0, 225),
+        };
+    };
+
     return (
         <>
             <Image
@@ -31,7 +37,7 @@ const Post = ({ post }) => {
                         {post.tag}
                     </chakra.span>
 
-                    <Box fontSize="2xl" cursor="pointer">
+                    <Box fontSize="2xl" cursor="pointer" color={'darkgreen'}>
                         <NavLink to={`posts/${post._id}`}>{post.title}</NavLink>
                     </Box>
 
@@ -44,7 +50,7 @@ const Post = ({ post }) => {
                         {post.subtitle}
                     </chakra.span>
                     <chakra.p mt={4} fontSize="sm" color={useColorModeValue('gray.400', 'gray.400')}>
-                        {post.content.substring(0, 225) + '...'}
+                        <div dangerouslySetInnerHTML={createHTML()}></div>
                     </chakra.p>
                 </Box>
 

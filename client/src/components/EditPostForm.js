@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useForm, Controller } from 'react-hook-form';
 import { updatePost } from '../redux/actions/post';
-import { Textarea, Box, Flex, Heading, Select } from '@chakra-ui/react';
+import { Box, Flex, Heading, Select } from '@chakra-ui/react';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
+
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
 
 const categories = ['Frontend', 'Backend', 'Mobile', 'React', 'Vue', 'JavaScript', 'Fun', 'Gaming'];
 
 const EditPostForm = ({ post, closeEditMode }) => {
     const [file, setFile] = useState(post?.image);
+    const [value, setValue] = useState();
     const { register, errors, control, handleSubmit } = useForm();
     const dispatch = useDispatch();
 
     const user = JSON.parse(localStorage.getItem("USER"));
+
+    const handleBody = e => {
+        setValue(e);
+    };
+    
 
     const onSubmit = async (data) => {
         try {
@@ -24,6 +33,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
                 _id: post._id,
                 ...data,
                 image: file,
+                content: value,
                 authorEmail: user?.email,
                 authorProfile: user?.picture,
             };
@@ -36,9 +46,13 @@ const EditPostForm = ({ post, closeEditMode }) => {
         }
     };
 
+    useEffect(() => {
+        setValue(post?.content)
+    }, [post?.content])
+
     return (
         <Flex maxW="900px" px={5} mx="auto" align="center" justify="center" minH={'90vh'}>
-            <Box w="100%" px={10} py={5} bg={('white', 'gray.700')} borderRadius="lg" boxShadow="dark-lg">
+            <Box w="100%" px={10} py={5} my={5} borderRadius="lg" boxShadow="dark-lg">
                 <Box textAlign="center">
                     <Heading as="h2">Edit Post </Heading>
                 </Box>
@@ -116,30 +130,19 @@ const EditPostForm = ({ post, closeEditMode }) => {
 
                         <FormControl isInvalid={errors.content} minH={'90px'}>
                             <FormLabel>Content</FormLabel>
-                            <Textarea
-                                id="content"
-                                label="İçerik"
-                                name="content"
-                                ref={register({
-                                    required: {
-                                        value: true,
-                                        message: 'This field is required.',
-                                    },
-                                    minLength: {
-                                        message: 'Content must contain at least 50 characters or more.',
-                                        value: 50,
-                                    },
-                                })}
+                            <ReactQuill
+                                value={value}
                                 defaultValue={post?.content}
+                                onChange={handleBody}                               
                             />
                             {errors.content && <p className="validation__error">{errors.content.message}</p>}
                         </FormControl>
 
-                        <FormControl mt={4}>
+                        <FormControl mt={16}>
                             <FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)} />
                         </FormControl>
 
-                        <Box mt={4} display="flex" alignItems="center" justifyContent="flex-end">
+                        <Box mt={9} display="flex" alignItems="center" justifyContent="flex-end">
                             <Button colorScheme="blue" mr={3} type="submit">
                                 Update
                             </Button>

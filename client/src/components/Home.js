@@ -14,6 +14,8 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import GoogleLogin from 'react-google-login';
+import { toast } from 'react-toastify';
+
 import { GOOGLE_CLIENT_ID } from '../constants';
 
 export default function CallToActionWithAnnotation() {
@@ -21,12 +23,18 @@ export default function CallToActionWithAnnotation() {
     const IdToken = localStorage.getItem('ID_TOKEN');
 
     const responseGoogle = response => {
-        localStorage.setItem("ID_TOKEN", response?.tokenObj?.id_token);
         if (response?.tokenObj?.id_token)
         {
-            setIsAuthenticated(true);
-            window.location.reload();
-            localStorage.setItem('USER', JSON.stringify(response?.profileObj));
+            const isPDEU = response?.profileObj?.email?.search("pdpu.ac.in") > 4;
+            if(isPDEU) {
+                setIsAuthenticated(true);
+                window.location.reload();
+                localStorage.setItem('ID_TOKEN', response?.tokenObj?.id_token);
+                localStorage.setItem('USER', JSON.stringify(response?.profileObj));
+            } 
+            else {
+                toast.error('Not From PDEU. 😒');
+            }
         } 
     };
 
@@ -43,8 +51,8 @@ export default function CallToActionWithAnnotation() {
         <>
             <Container maxW={'3xl'} minH="88vh" display="flex" alignItems="center" justifyContent="center">
                 <Stack as={Box} textAlign={'center'} spacing={{ base: 8, md: 14 }} py={{ base: 20, md: 36 }}>
-                    <Heading fontWeight={600} fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }} lineHeight={'110%'}>
-                        MERN Stack Blog App by <br />
+                    <Heading fontWeight={600} fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }} lineHeight={'100%'}>
+                        PDEU's Blog by <br /> <br />
                         <Text
                             as={'span'}
                             color={'green.400'}
@@ -81,6 +89,7 @@ export default function CallToActionWithAnnotation() {
                                 onSuccess={responseGoogle}
                                 onFailure={responseGoogle}
                                 cookiePolicy={'single_host_origin'}
+                                theme="dark"
                             />
                         )}
 

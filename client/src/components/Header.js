@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { chakra, useColorModeValue, Flex, Button, Link, Box } from '@chakra-ui/react';
+import { chakra, useColorModeValue, Flex, Button, Box } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/hooks';
 
 import Logo from '../images/Logo.png';
@@ -16,9 +16,18 @@ const Header = () => {
 
     const onLogout = () => {
         localStorage.clear();
-        history.push("/")
+        history.push('/');
         window.location.reload();
-    }
+    };
+
+    const changeTheme = () => {
+        if (localStorage.getItem('theme') === 'dark') {
+            localStorage.setItem('theme', 'light');
+        } else {
+            localStorage.setItem('theme', 'dark');
+        }
+        window.location.reload();
+    };
 
     return (
         <>
@@ -32,12 +41,11 @@ const Header = () => {
                         </Box>
                     </Flex>
                     <Flex align="center">
-                        <Link
+                        <Box
                             display="block"
                             color={useColorModeValue('gray.800', 'white')}
                             fontWeight="bold"
                             fontSize="lg"
-                            href={'/posts'}
                             px={2}
                             py={1}
                             rounded={'md'}
@@ -46,15 +54,19 @@ const Header = () => {
                                 bg: useColorModeValue('gray.200', 'gray.700'),
                             }}
                         >
-                            Posts
-                        </Link>
-
+                            <NavLink to="/posts">Posts</NavLink>
+                        </Box>
+                        <Button ml="5" colorScheme="facebook" size="sm" onClick={changeTheme}>
+                            {
+                                localStorage.getItem("theme") === "dark" ? "Light" : "Dark"
+                            }
+                        </Button>
                         {user && (
                             <>
-                                <Button ml="10" colorScheme="teal" size="sm" onClick={onOpen}>
+                                <Button ml="5" colorScheme="teal" size="sm" onClick={onOpen}>
                                     New Post
                                 </Button>
-                                <Button ml="10" colorScheme="red" size="sm" onClick={onLogout}>
+                                <Button ml="5" colorScheme="red" size="sm" onClick={onLogout}>
                                     Logout
                                 </Button>
                             </>

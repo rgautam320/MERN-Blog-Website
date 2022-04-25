@@ -1,11 +1,11 @@
 import React from 'react';
-import Loading from '../images/Loading.gif';
+import { InfinitySpin } from 'react-loader-spinner';
 
 const Loader = () => {
     return (
         <div className="loader">
             <figure>
-                <img src={Loading} alt="cute loader" />
+                <InfinitySpin color="lightblue" className="loader-inside" />
             </figure>
         </div>
     );

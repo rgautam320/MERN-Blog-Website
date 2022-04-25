@@ -11,9 +11,10 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    Textarea,
     Select,
 } from '@chakra-ui/react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
@@ -24,15 +25,20 @@ const categories = ['Frontend', 'Backend', 'Mobile', 'React', 'Vue', 'JavaScript
 
 const AddPostForm = ({ isOpen, onClose }) => {
     const [file, setFile] = useState(null);
+    const [value, setValue] = useState();
     const user = JSON.parse(localStorage.getItem('USER'));
 
     const { register, errors, control, handleSubmit } = useForm();
 
     const dispatch = useDispatch();
 
+    const handleBody = (e) => {
+        setValue(e);
+    }
+
     const onSubmit = async (data) => {
         try {
-            await dispatch(createPost({ ...data, image: file, author: user?.name, authorEmail: user?.email, authorProfile: user?.picture }));
+            await dispatch(createPost({ ...data, image: file, author: user?.name, authorEmail: user?.email, content: value, authorProfile: user?.picture }));
             toast.success('Blog successfully added!');
             clearForm();
         } catch (error) {
@@ -46,7 +52,7 @@ const AddPostForm = ({ isOpen, onClose }) => {
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} size="4xl">
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>Add New Post</ModalHeader>
@@ -120,27 +126,13 @@ const AddPostForm = ({ isOpen, onClose }) => {
                                 defaultValue={categories[0]}
                             />
                         </FormControl>
-                        <FormControl isInvalid={errors.content} minH={'90px'}>
+                        <FormControl isInvalid={errors.content} minH={'200px'}>
                             <FormLabel>Content</FormLabel>
-                            <Textarea
-                                id="content"
-                                label="İçerik"
-                                name="content"
-                                ref={register({
-                                    required: {
-                                        value: true,
-                                        message: 'This field is required.',
-                                    },
-                                    minLength: {
-                                        message: 'Content must contain at least 50 characters or more.',
-                                        value: 50,
-                                    },
-                                })}
-                            />
+                            <ReactQuill value={value} onChange={handleBody} placeholder="Enter Your Content" />
                             {errors.content && <p className="validation__error">{errors.content.message}</p>}
                         </FormControl>
 
-                        <FormControl mt={4}>
+                        <FormControl mt={'9'}>
                             <FileBase64 multiple={false} onDone={({ base64 }) => setFile(base64)} />
                         </FormControl>
 

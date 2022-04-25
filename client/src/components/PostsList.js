@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Post from './Post';
 import { fetchPosts } from '../redux/actions/post';
 import Loader from './Loader';
-import { useColorModeValue, Box, Wrap, Flex } from '@chakra-ui/react';
+import { Box, Wrap, Flex } from '@chakra-ui/react';
 
 const PostsList = () => {
     const listPost = useSelector(state => state.posts);
@@ -16,7 +16,6 @@ const PostsList = () => {
 
     return (
         <Flex
-            bg={useColorModeValue('#F9FAFB', 'gray.600')}
             px={5}
             py={30}
             w="full"

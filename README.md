@@ -9,6 +9,8 @@
 
 ### In the frontend, we have used Chakra UI.
 
+## Note: This website accepts Login from PDEU's email addresses only. 
+
 ### We've deployed the backend on Azure Web App and Heroku.
 
 #### Azure Web App: [API Endpoint](https://awt-lab-blog-website-api.azurewebsites.net)

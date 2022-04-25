@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import EditPostForm from './EditPostForm';
 import Loader from './Loader';
-import { Flex, Box, Image, chakra, Spacer, Link, Button, Heading, Text } from '@chakra-ui/react';
+import { Flex, Box, Image, chakra, Spacer, Link, Button, Heading } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import swal from 'sweetalert';
 
@@ -20,6 +20,12 @@ const PostDetails = () => {
     const [editMode, setEditMode] = useState(false);
 
     const user = JSON.parse(localStorage.getItem('USER'));
+
+    const createHTML = () => {
+        return {
+            __html: currentPost?.content,
+        };
+    }
 
     const openEditMode = () => {
         setEditMode(true);
@@ -72,7 +78,7 @@ const PostDetails = () => {
                         <Flex maxW="900px" mx="auto" align="center" justify="center" px={5}>
                             <Box w="100%" py={5}>
                                 <Box py={6}>
-                                    <Heading as="h1" size="xl" color={('gray.600', 'gray.100')}>
+                                    <Heading as="h1" size="xl" color={('gray.900', 'gray.600')}>
                                         {currentPost?.title}
                                     </Heading>
                                     <Heading
@@ -100,13 +106,13 @@ const PostDetails = () => {
                                                     alt="Avatar"
                                                 />
                                                 <Flex align="flex-start" direction="column">
-                                                    <Link mx={3} fontWeight="bold" color={('blue.600', 'brand.200')}>
+                                                    <Link mx={3} fontWeight="bold" color={('blue.600', 'brand.400')}>
                                                         {currentPost?.author}
                                                     </Link>
                                                     <chakra.span
                                                         mx={3}
                                                         fontSize="sm"
-                                                        color={('gray.600', 'whiteAlpha.600')}
+                                                        color={('gray.600', 'gray.300')}
                                                     >
                                                         {convertRelativeTime(currentPost?.createdAt)}
                                                     </chakra.span>
@@ -140,9 +146,8 @@ const PostDetails = () => {
                                             Photo by Lopez Robin on Unsplash
                                         </figcaption>
                                     </figure>
-                                    <Text mt={4} fontSize="lg" color={('gray.400', 'gray.300')}>
-                                        {currentPost?.content}
-                                    </Text>
+                                
+                                    <div dangerouslySetInnerHTML={createHTML()}></div>
                                 </Box>
                             </Box>
                         </Flex>

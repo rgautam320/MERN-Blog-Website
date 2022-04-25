@@ -24,7 +24,7 @@ const colors = {
 };
 
 const config = {
-    initialColorMode: 'dark',
+    initialColorMode: localStorage.getItem("theme") || "light",
     useSystemColorMode: false,
 };
 
