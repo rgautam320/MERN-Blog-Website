@@ -34,7 +34,10 @@ const Post = ({ post }) => {
                         color={useColorModeValue('brand.300', 'brand.300')}
                         cursor="pointer"
                     >
+                        <NavLink to={`/posts/category/${post?.tag?.toLowerCase()}`}>
                         {post.tag}
+                        </NavLink>
+                        
                     </chakra.span>
 
                     <Box fontSize="2xl" cursor="pointer" color={'darkgreen'}>

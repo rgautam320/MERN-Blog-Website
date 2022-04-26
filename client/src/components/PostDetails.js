@@ -140,11 +140,6 @@ const PostDetails = () => {
                                             src={currentPost?.image || 'https://loremflickr.com/1280/720'}
                                             alt={currentPost?.tag}
                                         />
-                                        <figcaption
-                                            style={{ textAlign: 'center', color: '#afacac', fontSize: '0.9rem' }}
-                                        >
-                                            Photo by Lopez Robin on Unsplash
-                                        </figcaption>
                                     </figure>
                                 
                                     <div dangerouslySetInnerHTML={createHTML()}></div>

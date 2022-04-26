@@ -16,6 +16,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/posts" component={PostsList} />
+                    <Route exact path="/posts/category/:category" component={PostsList} />
                     <Route exact path="/posts/:id" component={PostDetails} />
                     <Redirect to="/" />
                 </Switch>
