@@ -23,7 +23,6 @@ const postReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload,
             };
-
         case types.FETCH_SINGLE_POST_REQUEST:
             return {
                 loading: true,

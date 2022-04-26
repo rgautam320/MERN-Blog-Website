@@ -78,7 +78,7 @@ const PostDetails = () => {
                         <Flex maxW="900px" mx="auto" align="center" justify="center" px={5}>
                             <Box w="100%" py={5}>
                                 <Box py={6}>
-                                    <Heading as="h1" size="xl" color={('gray.900', 'gray.600')}>
+                                    <Heading as="h1" size="xl" color={('gray.800', 'gray.500')}>
                                         {currentPost?.title}
                                     </Heading>
                                     <Heading

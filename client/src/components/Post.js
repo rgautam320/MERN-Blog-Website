@@ -31,7 +31,7 @@ const Post = ({ post }) => {
                     <chakra.span
                         fontSize="xs"
                         textTransform="uppercase"
-                        color={useColorModeValue('brand.600', 'brand.300')}
+                        color={useColorModeValue('brand.300', 'brand.300')}
                         cursor="pointer"
                     >
                         {post.tag}
@@ -49,7 +49,7 @@ const Post = ({ post }) => {
                     >
                         {post.subtitle}
                     </chakra.span>
-                    <chakra.p mt={4} fontSize="sm" color={useColorModeValue('gray.400', 'gray.400')}>
+                    <chakra.p mt={4} fontSize="sm" color={useColorModeValue('gray.300', 'gray.300')}>
                         <div dangerouslySetInnerHTML={createHTML()}></div>
                     </chakra.p>
                 </Box>
@@ -64,7 +64,7 @@ const Post = ({ post }) => {
                                 src={post?.authorProfile || 'https://source.unsplash.com/random/48x48'}
                                 alt="Avatar"
                             />
-                            <Link mx={2} fontWeight="bold" color={useColorModeValue('gray.700', 'gray.200')}>
+                            <Link mx={2} fontWeight="bold" color={useColorModeValue('gray.300', 'gray.200')}>
                                 {post.author}
                             </Link>
                         </Flex>

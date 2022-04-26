@@ -1,5 +1,6 @@
 import * as types from './types';
 import * as api from '../../api';
+import axios from 'axios';
 
 export const fetchPosts = () => async dispatch => {
     try {
@@ -20,6 +21,21 @@ export const fetchSinglePost = id => async dispatch => {
         dispatch({ type: types.FETCH_SINGLE_POST_FAIL, payload: error.message });
     }
 };
+
+export const uploadImage = (file) => async dispatch => {
+    const body = new FormData();
+    body.append("file", file);
+    body.append("upload_preset", "awtlab");
+    body.append("cloud_name", "PDEU")
+
+    dispatch({ type: types.UPLOAD_IMAGE_REQUEST });
+    const {data} = await axios.post("https://api.cloudinary.com/v1_1/PDEU/upload", body)
+    if(data){
+        return data?.image_url || data?.url
+    } else {
+        return null;
+    }
+}
 
 export const createPost = post => async dispatch => {
     try {

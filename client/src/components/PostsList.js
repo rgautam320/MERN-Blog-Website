@@ -33,7 +33,7 @@ const PostsList = () => {
                             mx="auto"
                             rounded="lg"
                             shadow="md"
-                            bg={('white', 'gray.800')}
+                            bg={('gray.800', 'gray.800')}
                             maxW="md"
                             key={post?._id}
                             boxShadow="dark-lg"
