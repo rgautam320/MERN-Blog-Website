@@ -21,6 +21,8 @@ content.
 5. Blog Category: 
 Each blog can be assigned to any pre-defined category which can be used to 
 filter blogs based on their category. 
+6. Search Blogs:
+You can search blogs by blog title, subtitle, author and their content.
 
 ## Tech Stack / Services Used
 
